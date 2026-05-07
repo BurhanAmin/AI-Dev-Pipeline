@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: 9 9 11;
+  --foreground: 250 250 250;
+  --card: 24 24 27;
+  --border: 39 39 42;
+  --secondary: 39 39 42;
+  --muted-foreground: 161 161 170;
+  --accent: 34 197 94;
+  --accent-foreground: 5 46 22;
+  --destructive: 239 68 68;
+  --sidebar: 17 17 19;
+  --sidebar-border: 39 39 42;
+  --sidebar-foreground: 250 250 250;
+  --sidebar-accent: 39 39 42;
+}
+
+body {
+  background-color: rgb(var(--background));
+  color: rgb(var(--foreground));
+}

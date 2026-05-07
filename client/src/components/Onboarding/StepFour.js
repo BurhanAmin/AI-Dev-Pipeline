@@ -23,26 +23,61 @@ function StepFour({ onNext, data }) {
     }
   };
 
-  return (
-    <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">
-      <h3 className="text-xl font-semibold mb-2">GitHub Token</h3>
-      <p className="text-gray-400 text-sm mb-6">
-        Go to <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer"
-          className="text-indigo-400 underline">github.com/settings/tokens</a> → Generate new token (classic).
-        Give it <strong>repo</strong> scope and paste it below.
+return (
+    <div className="bg-card rounded-2xl p-8 border border-border">
+      {/* Version B header style */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-10 h-10 rounded-lg bg-accent/20 flex items-center justify-center">
+          <span className="text-accent text-lg">🐙</span>
+        </div>
+        <div>
+          <p className="text-xs text-muted-foreground">Step 4 of 4</p>
+          <h3 className="text-xl font-semibold text-foreground">GitHub Token</h3>
+        </div>
+      </div>
+
+      {/* Configuration summary — Version B style */}
+      <div className="bg-secondary/50 rounded-xl border border-border divide-y divide-border mb-6">
+        <div className="px-4 py-3 flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">v0 API</span>
+          <span className="text-xs text-accent font-medium">✓ Connected</span>
+        </div>
+        <div className="px-4 py-3 flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">Supabase</span>
+          <span className="text-xs text-accent font-medium">✓ Connected</span>
+        </div>
+        <div className="px-4 py-3 flex items-center justify-between">
+          <span className="text-sm text-muted-foreground">Vercel</span>
+          <span className="text-xs text-accent font-medium">✓ Connected</span>
+        </div>
+      </div>
+
+      <p className="text-muted-foreground text-sm mb-6">
+        Go to{' '}
+        <a href="https://github.com/settings/tokens" target="_blank" rel="noreferrer"
+          className="text-accent underline">
+          github.com/settings/tokens
+        </a>{' '}
+        → Generate new token (classic). Give it <strong>repo</strong> scope and paste it below.
       </p>
+
+      {/* Version A input — same type, placeholder, value, onChange */}
       <input
         type="password"
         placeholder="ghp_xxxxxxxxxxxx"
         value={githubToken}
         onChange={e => setGithubToken(e.target.value)}
-        className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 mb-4"
+        className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent mb-4"
       />
-      {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
+
+      {/* Version A error — untouched */}
+      {error && <p className="text-destructive text-sm mb-3">{error}</p>}
+
+      {/* Version A button — same onClick (handleFinish), disabled logic, loading text */}
       <button
         onClick={handleFinish}
         disabled={!githubToken || loading}
-        className="w-full bg-green-600 hover:bg-green-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium py-3 rounded-lg transition"
+        className="w-full bg-accent hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed text-accent-foreground font-medium py-3 rounded-lg transition-colors"
       >
         {loading ? 'Saving...' : 'Finish Setup 🚀'}
       </button>

@@ -71,27 +71,35 @@ function Dashboard({ user }) {
 
   return (
     <div>
-      <h2 className="text-3xl font-bold mb-2">Build your MVP</h2>
-      <p className="text-gray-400 mb-8">Describe your app and we'll handle the rest.</p>
+      {/* Version B header style */}
+      <div className="mb-8">
+        <h2 className="text-3xl font-bold text-foreground mb-2">Build your MVP</h2>
+        <p className="text-muted-foreground">Describe your app and we&apos;ll handle the rest.</p>
+      </div>
 
-      <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800 mb-6">
+      {/* Input card — Version B style */}
+      <div className="bg-card rounded-2xl p-6 border border-border mb-6">
+        {/* Version A textarea — same rows, placeholder, value, onChange */}
         <textarea
           rows={4}
           placeholder="e.g. A fitness tracker where users can log workouts and see weekly progress charts..."
           value={input}
           onChange={e => setInput(e.target.value)}
-          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500 resize-none mb-4"
+          className="w-full bg-secondary border border-border rounded-lg px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent resize-none mb-4"
         />
+        {/* Version A button — same onClick, disabled, text */}
         <button
           onClick={handleBuild}
           disabled={loading || !input}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition"
+          className="w-full bg-accent hover:bg-accent/90 disabled:opacity-40 disabled:cursor-not-allowed text-accent-foreground font-semibold py-3 rounded-lg transition-colors"
         >
           {loading ? 'Building...' : '⚡ Build my app'}
         </button>
-        {error && <p className="text-red-400 text-sm mt-3">{error}</p>}
+        {/* Version A error — untouched */}
+        {error && <p className="text-destructive text-sm mt-3">{error}</p>}
       </div>
 
+      {/* Version A conditional rendering — untouched exactly */}
       {stage >= 0 && <PipelineProgress stages={STAGES} current={stage} />}
       {previewUrl && <Preview url={previewUrl} />}
       {handoffPrompt && <CursorHandoff prompt={handoffPrompt} />}

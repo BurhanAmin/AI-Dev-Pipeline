@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import History from './components/History/History';
 
 function App() {
+  // Version A logic — untouched
   const [user, setUser] = useState(null);
   const [screen, setScreen] = useState('onboarding');
 
@@ -13,20 +14,36 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
-      <nav className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-white tracking-tight">⚡ MVP Pipeline</h1>
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      {/* Version B nav UI */}
+      <nav className="border-b border-border px-6 py-4 flex items-center justify-between bg-card">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-accent/20 flex items-center justify-center">
+            <span className="text-accent text-sm">⚡</span>
+          </div>
+          <span className="text-lg font-semibold text-foreground tracking-tight">MVP Pipeline</span>
+        </div>
+
+        {/* Version A condition — only show nav when user exists */}
         {user && (
-          <div className="flex gap-4">
+          <div className="flex gap-2">
             <button
               onClick={() => setScreen('dashboard')}
-              className={`text-sm px-4 py-2 rounded-lg transition ${screen === 'dashboard' ? 'bg-indigo-600 text-white' : 'text-gray-400 hover:text-white'}`}
+              className={`text-sm px-4 py-2 rounded-lg transition-colors ${
+                screen === 'dashboard'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+              }`}
             >
               Dashboard
             </button>
             <button
               onClick={() => setScreen('history')}
-              className={`text-sm px-4 py-2 rounded-lg transition ${screen === 'history' ? 'bg-indigo-600 text-white' : 'text-gray-400 hover:text-white'}`}
+              className={`text-sm px-4 py-2 rounded-lg transition-colors ${
+                screen === 'history'
+                  ? 'bg-accent text-accent-foreground'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+              }`}
             >
               Projects
             </button>
@@ -34,7 +51,8 @@ function App() {
         )}
       </nav>
 
-      <main className="max-w-4xl mx-auto px-6 py-10">
+      <main className="flex-1 max-w-4xl mx-auto w-full px-6 py-10">
+        {/* Version A routing — untouched */}
         {screen === 'onboarding' && <Onboarding onComplete={handleOnboardingComplete} />}
         {screen === 'dashboard' && <Dashboard user={user} />}
         {screen === 'history' && <History user={user} />}
