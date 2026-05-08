@@ -6,11 +6,11 @@ const supabase = createClient(
 );
 
 const saveCredentials = async (req, res) => {
-  const { userId, supabaseUrl, supabaseKey, vercelToken } = req.body;
+  const { userId, supabaseUrl, supabaseKey, vercelToken , v0ApiKey, githubToken } = req.body;
 
   const { data, error } = await supabase
     .from('users')
-    .upsert({ id: userId, supabase_url: supabaseUrl, supabase_key: supabaseKey, vercel_token: vercelToken });
+    .upsert({ id: userId, supabase_url: supabaseUrl, supabase_key: supabaseKey, vercel_token: vercelToken , v0_api_key:v0ApiKey, github_token : githubToken});
 
   if (error) return res.status(400).json({ error: error.message });
   res.json({ message: 'Credentials saved', data });
